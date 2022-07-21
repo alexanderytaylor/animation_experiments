@@ -1,5 +1,7 @@
 import 'package:animation_experiments/experiments/experiments.dart';
+import 'package:animation_experiments/friction_simulation/friction_simulation.dart';
 import 'package:animation_experiments/glass_of_liquid/glass_of_liquid.dart';
+import 'package:animation_experiments/spring_simulation/spring_simulation.dart';
 import 'package:animation_experiments/thermometer/thermometer.dart';
 import 'package:flutter/material.dart';
 
@@ -33,6 +35,16 @@ class ExperimentsView extends StatelessWidget {
                 Navigator.of(context).push(GlassOfLiquidPage.route()),
             name: 'Glass of Liquid',
           ),
+          ExperimentButton(
+            onPressed: () =>
+                Navigator.of(context).push(FrictionSimulationPage.route()),
+            name: 'Friciton Simulation',
+          ),
+          ExperimentButton(
+            onPressed: () =>
+                Navigator.of(context).push(SpringSimulaitonPage.route()),
+            name: 'Spring Simulation',
+          )
         ],
       ),
     );
