@@ -1,15 +1,16 @@
+import 'package:animation_experiments/gen/assets.gen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:flutter/scheduler.dart';
 
-class SpringChallenge extends StatefulWidget {
-  const SpringChallenge({super.key});
+class SpideySpring extends StatefulWidget {
+  const SpideySpring({super.key});
 
   @override
-  State<SpringChallenge> createState() => _SpringChallengeState();
+  State<SpideySpring> createState() => _SpideySpringState();
 }
 
-class _SpringChallengeState extends State<SpringChallenge>
+class _SpideySpringState extends State<SpideySpring>
     with SingleTickerProviderStateMixin {
   final _springDescription = const SpringDescription(
     mass: 1,
@@ -17,6 +18,7 @@ class _SpringChallengeState extends State<SpringChallenge>
     damping: 15,
   );
 
+  late Size _size;
   late Spring _spring;
   bool _isInitialized = false;
 
@@ -62,6 +64,7 @@ class _SpringChallengeState extends State<SpringChallenge>
         if (box != null && box.hasSize) {
           setState(() {
             _isInitialized = true;
+            _size = box.size;
             _spring
               ..anchorPosition = box.size.center(Offset.zero)
               ..springPosition = _spring.anchorPosition;
@@ -80,6 +83,13 @@ class _SpringChallengeState extends State<SpringChallenge>
       child: Stack(
         children: [
           _buildBackground(),
+          Transform.translate(
+            offset: Offset(_size.width * .5, _size.height * .7),
+            child: FractionalTranslation(
+              translation: const Offset(-.5, -.5),
+              child: _buildTutorialText(),
+            ),
+          ),
           CustomPaint(
             painter: WebPainter(
               anchorPosition: _spring.anchorPosition,
@@ -91,7 +101,7 @@ class _SpringChallengeState extends State<SpringChallenge>
             offset: _spring.springPosition,
             child: FractionalTranslation(
               translation: const Offset(-.5, -.5),
-              child: _buildBall(),
+              child: _buildSpideyBall(),
             ),
           ),
         ],
@@ -105,14 +115,20 @@ class _SpringChallengeState extends State<SpringChallenge>
         ),
       );
 
-  Container _buildBall() {
-    return Container(
+  Widget _buildTutorialText() {
+    return Text(
+      '''
+Drag to spring,
+ Tap to swing!''',
+      style: TextStyle(color: Colors.white.withAlpha(210)),
+    );
+  }
+
+  Widget _buildSpideyBall() {
+    return SizedBox(
       width: 64,
       height: 64,
-      decoration: BoxDecoration(
-        color: Colors.redAccent[400],
-        shape: BoxShape.circle,
-      ),
+      child: Assets.images.springChallenge.spidey.image(),
     );
   }
 }

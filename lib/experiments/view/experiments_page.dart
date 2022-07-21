@@ -49,7 +49,7 @@ class ExperimentsView extends StatelessWidget {
           ExperimentButton(
             onPressed: () =>
                 Navigator.of(context).push(SpringChallengePage.route()),
-            name: 'Spring Challenge',
+            name: 'Spidey Spring Challenge',
           )
         ],
       ),
