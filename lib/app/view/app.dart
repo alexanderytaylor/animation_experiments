@@ -6,7 +6,6 @@
 // https://opensource.org/licenses/MIT.
 
 import 'package:animation_experiments/experiments/experiments.dart';
-import 'package:animation_experiments/glass_of_liquid/glass_of_liquid.dart';
 import 'package:animation_experiments/l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
